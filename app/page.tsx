@@ -3,17 +3,34 @@ import { useState } from "react";
 import { useAppContext } from "@/context/AppContext";
 import ProductCard from "@/components/ProductCard";
 
+// ترجمة أسماء الـ categories للعربي
+const CATEGORY_AR: Record<string, string> = {
+  "All":         "الكل",
+  "Sandwiches":  "شطائر",
+  "Burgers":     "برغر",
+  "Pizza":       "بيتزا",
+  "Salads":      "سلطات",
+  "Mains":       "أطباق رئيسية",
+  "Desserts":    "حلويات",
+  "Drinks":      "مشروبات",
+};
+
 export default function MenuPage() {
   const { t, lang, products } = useAppContext();
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
   const categories = ["All", ...new Set(products.map(p => p.category))];
+
   const filtered = products.filter(p => {
     const matchCat = activeCategory === "All" || p.category === activeCategory;
     const matchSearch = (p.name + " " + (p.nameAr || "")).toLowerCase().includes(search.toLowerCase());
     return matchCat && matchSearch;
   });
+
+  // دالة بترجع اسم الـ category حسب اللغة
+  const getCatLabel = (cat: string) =>
+    lang === "ar" ? (CATEGORY_AR[cat] ?? cat) : cat;
 
   return (
     <div style={{ direction: t.dir }}>
@@ -28,7 +45,11 @@ export default function MenuPage() {
         value={search}
         onChange={e => setSearch(e.target.value)}
         placeholder={t.search}
-        style={{ width: "100%", padding: "10px 16px", borderRadius: 10, border: "1px solid #e5e7eb", fontSize: 14, marginBottom: 20, boxSizing: "border-box" as const, outline: "none", color: "#111" }}
+        style={{
+          width: "100%", padding: "10px 16px", borderRadius: 10,
+          border: "1px solid #e5e7eb", fontSize: 14, marginBottom: 20,
+          boxSizing: "border-box" as const, outline: "none", color: "#111",
+        }}
       />
 
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 28 }}>
@@ -36,9 +57,15 @@ export default function MenuPage() {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            style={{ padding: "7px 16px", borderRadius: 99, border: "1px solid", borderColor: activeCategory === cat ? "#e85d04" : "#e5e7eb", background: activeCategory === cat ? "#e85d04" : "#fff", color: activeCategory === cat ? "#fff" : "#6b7280", fontSize: 13, fontWeight: 500, cursor: "pointer" }}
+            style={{
+              padding: "7px 16px", borderRadius: 99, border: "1px solid",
+              borderColor: activeCategory === cat ? "#e85d04" : "#e5e7eb",
+              background: activeCategory === cat ? "#e85d04" : "#fff",
+              color: activeCategory === cat ? "#fff" : "#6b7280",
+              fontSize: 13, fontWeight: 500, cursor: "pointer",
+            }}
           >
-            {lang === "ar" && cat === "All" ? "الكل" : cat}
+            {getCatLabel(cat)}
           </button>
         ))}
       </div>
@@ -48,7 +75,6 @@ export default function MenuPage() {
           <ProductCard key={product.id} product={product} />
         ))}
 
-        {/* Empty state لو مفيش نتايج */}
         {filtered.length === 0 && (
           <div style={{ gridColumn: "1 / -1", textAlign: "center", padding: "60px 20px" }}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🔍</div>
@@ -60,7 +86,11 @@ export default function MenuPage() {
             </p>
             <button
               onClick={() => { setSearch(""); setActiveCategory("All"); }}
-              style={{ marginTop: 16, background: "#e85d04", border: "none", borderRadius: 10, padding: "10px 24px", color: "#fff", fontSize: 14, fontWeight: 600, cursor: "pointer" }}
+              style={{
+                marginTop: 16, background: "#e85d04", border: "none",
+                borderRadius: 10, padding: "10px 24px",
+                color: "#fff", fontSize: 14, fontWeight: 600, cursor: "pointer",
+              }}
             >
               {lang === "ar" ? "عرض الكل" : "Show All"}
             </button>
