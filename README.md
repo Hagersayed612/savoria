@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍽️ Savoria - Online Food Ordering App
 
-## Getting Started
+A full-featured food ordering web application built with **Next.js 14**, **TypeScript**, and **React Context API**.
 
-First, run the development server:
+## 🔗 Live Demo
+[savoria.vercel.app](https://savoria.vercel.app)
 
-```bash
+## ✨ Features
+
+- 🛒 **Menu & Cart** — Browse dishes, add to cart, adjust quantities
+- 🔐 **Authentication** — Register & login with email/password validation
+- 💳 **Payment Options** — Cash on Delivery or Online Payment
+- 📦 **Order Tracking** — Real-time status tracking with progress bar
+- ⚙️ **Admin Dashboard** — Manage products & update order statuses
+- 🌍 **Multi-language** — Full Arabic & English support with RTL layout
+- 💾 **Persistent Storage** — Data saved in localStorage across sessions
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **State Management:** React Context API + localStorage
+- **Styling:** Inline styles (no external CSS library)
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+\`\`\`bash
+git clone https://github.com/USERNAME/savoria.git
+cd savoria
+\`\`\`
+
+2. Install dependencies:
+\`\`\`bash
+npm install
+\`\`\`
+
+3. Run the development server:
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 👤 Test Accounts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Role  | Email             | Password   |
+|-------|-------------------|------------|
+| Admin | admin@savoria.com | admin123   |
+| User  | user@savoria.com  | user123    |
 
-## Learn More
+> **Note:** Register these accounts first via the Sign Up page.
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+\`\`\`
+src/
+├── app/
+│   ├── page.tsx          # Menu page
+│   ├── cart/             # Cart page
+│   ├── checkout/         # Checkout page
+│   ├── orders/           # Order tracking
+│   ├── admin/            # Admin dashboard
+│   └── login/            # Authentication
+├── components/
+│   ├── Navbar.tsx
+│   ├── ProductCard.tsx
+│   ├── OrderCard.tsx
+│   ├── AdminMenu.tsx
+│   ├── AdminOrders.tsx
+│   └── Notification.tsx
+├── context/
+│   └── AppContext.tsx     # Global state
+├── data/
+│   ├── products.ts
+│   └── translations.ts
+└── types/
+    └── index.ts
+\`\`\`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📸 Screenshots
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Menu | Cart | Admin |
+|------|------|-------|
+| ![Menu](screenshots/menu.png) | ![Cart](screenshots/cart.png) | ![Admin](screenshots/admin.png) |
